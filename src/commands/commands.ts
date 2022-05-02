@@ -1,12 +1,12 @@
 import { Enemy, Servant } from "@atlasacademy/api-connector";
 import { commands } from "./command-object";
-import { test } from "./test";
+import { calcSvt } from "./test";
 
 /**
  * Maps the {@link commands} to a human-readable description containing type, aliases, etc
  * @returns
  */
-const help = () => {
+const cmdArgs = () => {
     const args: { name: string; description: string }[] = [];
 
     for (const [commandName, command] of Object.entries(commands)) {
@@ -65,4 +65,4 @@ const getNps = (svt: Servant.Servant | Enemy.Enemy) => {
     return npDesc;
 };
 
-export { getNps, help, test };
+export { calcSvt, cmdArgs, getNps };

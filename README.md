@@ -8,7 +8,7 @@ Damage, Refund and Stargen calculator for player and enemy characters from Fate/
 
 ```typescript
 import { ApiConnector, Language, Region, Servant, Enemy } from "@atlasacademy/api-connector";
-import { test } from "fgo-calc";
+import { calcSvt } from "fgo-calc";
 
 const cacheDuration = 20 * 1000;
 const apiConnector = new ApiConnector({
@@ -25,15 +25,15 @@ function getSvt(id: number): Promise<Servant.Servant | Enemy.Enemy> {
     return apiConnector.servant(id, false, cacheDuration);
 }
 
-getSvt(100500).then(test(svt, commandString));
+getSvt(100500).then(calcSvt(svt, commandString));
 ```
 
 #### Get human-readable help messages
 
 ```typescript
-import { help } from "fgo-calc";
+import { cmdArgs } from "fgo-calc";
 
-help();
+cmdArgs();
 ```
 
 ---

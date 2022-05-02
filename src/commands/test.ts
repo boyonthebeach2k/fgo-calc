@@ -10,7 +10,7 @@ import { CalcVals, ChainCalcVals, EnemyCalcVals } from "./interfaces/commands.in
  * @param argStr The command string containing the various buffs and enemy details to be parsed
  * @returns The calced results of the given command string
  */
-const test = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
+const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
     let vals: CalcVals | ChainCalcVals | EnemyCalcVals;
 
     const cmdArgs = argStr
@@ -318,4 +318,4 @@ const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCa
     return enemyCalcVals;
 };
 
-export { test };
+export { calcSvt };

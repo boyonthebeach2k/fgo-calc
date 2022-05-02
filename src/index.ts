@@ -1,3 +1,3 @@
-import { getNps, help, test } from "./commands/commands";
+import { calcSvt, cmdArgs, getNps } from "./commands/commands";
 
-export { getNps, help, test };
+export { calcSvt, cmdArgs, getNps };
