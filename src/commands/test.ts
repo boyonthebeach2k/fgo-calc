@@ -22,63 +22,18 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
         .replace(/\s+/g, " ") // removing unwieldy whitespace
         .trim();
 
-    let fields = {
-        damage: 0,
-        minrollDamage: 0,
-        maxrollDamage: 0,
-
-        minrollRefund: 0,
-        maxrollRefund: 0,
-
-        minrollStars: 0,
-        maxrollStars: 0,
-
-        overkillNo: 0,
-        maxOverkillNo: 0,
-        warnings: "",
-    };
-
     if (cmdArgs.includes("[")) {
         vals = multiEnemy(svt, cmdArgs);
-
-        vals.waves.forEach((wave) => {
-            fields.damage += wave.waveFields.totalDamage;
-            fields.minrollDamage = wave.waveFields.minrollTotalDamage;
-            fields.maxrollDamage = wave.waveFields.maxrollTotalDamage;
-            fields.minrollRefund = wave.waveFields.minrollTotalRefund;
-            fields.maxrollRefund = wave.waveFields.maxrollTotalRefund;
-            fields.minrollStars = wave.waveFields.minrollTotalStars;
-            fields.maxrollStars = wave.waveFields.maxrollTotalStars;
-        });
-
         type = "enemy";
     } else if (cmdArgs.match(/([abqx]|(np)){3}/g) !== null) {
         vals = chain(svt, cmdArgs);
-
-        fields.damage = vals.totalDamage;
-        fields.minrollDamage = vals.minrollTotalDamage;
-        fields.maxrollDamage = vals.maxrollTotalDamage;
-        fields.minrollRefund = vals.minrollTotalRefund;
-        fields.maxrollRefund = vals.maxrollTotalRefund;
-        fields.minrollStars = vals.minrollTotalMinStars;
-        fields.maxrollStars = vals.maxrollTotalMaxStars;
-
         type = "chain";
     } else {
         vals = calc(svt, cmdArgs);
-
-        fields.damage = vals.damageFields.damage;
-        fields.minrollDamage = vals.damageFields.minrollDamage;
-        fields.maxrollDamage = vals.damageFields.maxrollDamage;
-        fields.minrollRefund = vals.minNPFields.NPRegen;
-        fields.maxrollRefund = vals.maxNPFields.NPRegen;
-        fields.minrollStars = vals.minStarFields.minStars;
-        fields.maxrollStars = vals.maxStarFields.maxStars;
-
         type = "card";
     }
 
-    return { vals, fields, type };
+    return { vals, type };
 };
 
 /**
