@@ -122,7 +122,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     //--- Setting facecard, if any
 
-    let faceCard = !!(svt.type === "normal" && (args.arts || args.buster || args.quick || args.extra));
+    let faceCard = !!(["normal", "enemyCollectionDetail"].includes(svt.type) && (args.arts || args.buster || args.quick || args.extra));
     let enemyFaceCard = !!(svt.type === "enemy" && (args.weak || args.strength));
 
     npDamageMultiplier = f32(args.npValue ?? npDamageMultiplier) / f32(100);
@@ -148,9 +148,9 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     let servantAtk = f32(args.level > 0 ? svt.atkGrowth[args.level - 1] : svt.atkMax);
 
-    let triangleModifier = f32(args.classOverride ?? classRelation[svt.className][enemyClass] / f32(1000));
+    let triangleModifier = f32(args.classOverride ?? (classRelation[svt.className]?.[enemyClass] ?? 1000) / f32(1000));
 
-    let attributeModifier = f32(attributeRelation[svt.attribute][enemyAttribute] / f32(1000));
+    let attributeModifier = f32(attributeRelation[svt.attribute]?.[enemyAttribute] ?? 1000 / f32(1000));
 
     let extraCardModifier: 1 | 2 | 3.5 = args.extra ? 2 : 1;
 
@@ -567,11 +567,12 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         enemyAttribute,
         enemyClass,
         enemyFaceCard,
-        ...(args.enemyHp ? { enemyHp: f32(args.enemyHp) } : {}),
+        ...(args.enemyHp !== undefined ? { enemyHp: f32(args.enemyHp) } : {}),
         hits,
-        ...(args.reducedHp ? { reducedHp: f32(args.reducedHp) } : {}),
-        ...(args.rng ? { rng: f32(args.rng) } : {}),
+        ...(args.reducedHp !== undefined ? { reducedHp: f32(args.reducedHp) } : {}),
+        ...(args.rng !== undefined ? { rng: f32(args.rng) } : {}),
         servantName,
+        servantClass: svt.className,
         warnMessage,
         verbosity,
         fou: args.fou,

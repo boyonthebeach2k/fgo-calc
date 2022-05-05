@@ -13,6 +13,8 @@ import { CalcVals, ChainCalcVals, EnemyCalcVals } from "./interfaces/commands.in
 const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
     let vals: CalcVals | ChainCalcVals | EnemyCalcVals;
 
+    let type: "card" | "chain" | "enemy";
+
     const cmdArgs = argStr
         .split("#")[0] // removing trailing comments from the command string
         .replace(/\/\*[\s\S]*?(\*\/)/g, "") // removing inline comments from the command string
@@ -38,6 +40,7 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
 
     if (cmdArgs.includes("[")) {
         vals = multiEnemy(svt, cmdArgs);
+
         vals.waves.forEach((wave) => {
             fields.damage += wave.waveFields.totalDamage;
             fields.minrollDamage = wave.waveFields.minrollTotalDamage;
@@ -47,6 +50,8 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
             fields.minrollStars = wave.waveFields.minrollTotalStars;
             fields.maxrollStars = wave.waveFields.maxrollTotalStars;
         });
+
+        type = "enemy";
     } else if (cmdArgs.match(/([abqx]|(np)){3}/g) !== null) {
         vals = chain(svt, cmdArgs);
 
@@ -57,6 +62,8 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
         fields.maxrollRefund = vals.maxrollTotalRefund;
         fields.minrollStars = vals.minrollTotalMinStars;
         fields.maxrollStars = vals.maxrollTotalMaxStars;
+
+        type = "chain";
     } else {
         vals = calc(svt, cmdArgs);
 
@@ -67,9 +74,11 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
         fields.maxrollRefund = vals.maxNPFields.NPRegen;
         fields.minrollStars = vals.minStarFields.minStars;
         fields.maxrollStars = vals.maxStarFields.maxStars;
+
+        type = "card";
     }
 
-    return { vals, fields };
+    return { vals, fields, type };
 };
 
 /**

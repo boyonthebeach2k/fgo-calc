@@ -9,7 +9,6 @@
         "build": "tsc",
         "link": "npm run build && cd dist && npm link",
         "prepare": "tsc",
-        "publish": "npm run build && npm publish",
         "watch": "tsc -w --preserveWatchOutput"
     },
     "repository": {

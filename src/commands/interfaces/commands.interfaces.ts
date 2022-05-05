@@ -114,6 +114,8 @@ export interface CalcTerms {
     rng?: number;
     /** The name of the current servant */
     servantName: string;
+    /** The class of the current servant */
+    servantClass: string;
     /** Messaage to display for any warnings triggered */
     warnMessage: string;
     /** Verbose level */
