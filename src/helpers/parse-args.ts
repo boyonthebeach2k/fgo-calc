@@ -243,7 +243,7 @@ const parseMultiEnemyCommandString = (cmdStr: string) => {
             let chain = (enemy.match(/([abqx]|(np)){3}/gi) && enemy.split(",")[0]) ?? "";
             let chainCards = (enemy.match(/([abqx]|(np)){3}/gi) ?? [""])[0].toLowerCase();
 
-            //--- Getting the position of NP cad if any in the chain and then getting buffs for that card only
+            //--- Getting the position of NP card (if any) in the chain and then getting buffs for that card only
 
             let npPosition = (chainCards !== "npnpnp" ? chainCards.indexOf("np") : -1) + 1;
             npCmd = npCmd || (chain.split(new RegExp(`card\\s*${npPosition}`))[1]?.split("card")?.[0] ?? "");
