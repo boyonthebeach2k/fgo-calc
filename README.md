@@ -17,15 +17,17 @@ const apiConnector = new ApiConnector({
     language: Language.ENGLISH,
 });
 
-const commandString = `L100 | c2000 cd20 /*L100 grudge match*/ | a44 am20 /*skills 1&2*/ |
-    a40 ng45 sg50 /*bride1*/ | a50 /*casumu s3*/ | a40 ng45 sg50 /*bride1 dies, enter bride2*/ |
-    npqb d-20 | a36 n18 /*arctic L9*/ | caster sky hp187863 | card1 d20 #turn3`;
+// For testing Leonardo da Vinci (Rider) on XMas 5 Lottery node:
+const commandString = `c666 l100 ng10 n30 m20 ng45 a40 sg50 a30 fd500 lancer sky
+ [m5 hp24945, m5 hp33371, m5 hp24526 fr30 fr40]
+ [m20 n10 hp92001, m20 n10 hp34015, m20 n10 fr10 fr10 fr40 hp27176]
+ [hp31308, hp31869, hp151215 fr40]`;
 
 function getSvt(id: number): Promise<Servant.Servant | Enemy.Enemy> {
     return apiConnector.servant(id, false, cacheDuration);
 }
 
-getSvt(100500).then((svt) => calcSvt(svt, commandString));
+getSvt(403500).then((svt) => calcSvt(svt, commandString));
 ```
 
 #### Get human-readable help messages
