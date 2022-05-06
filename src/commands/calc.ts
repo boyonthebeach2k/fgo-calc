@@ -267,7 +267,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         busterFirst = false;
     }
 
-    if (faceCard) {
+    if (faceCard && !args.extra) {
         let tmpCardValue = cardDamageValue;
         if ((args.busterChain && !args.extra) || args.buster || (busterChainMod && !args.extra)) {
             cardDamageValue = 1.5;
