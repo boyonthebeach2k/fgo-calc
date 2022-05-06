@@ -56,9 +56,13 @@ export interface CommandObject extends ServantBaseStats {
     atkMod: number;
     defMod: number;
     //    Type 2
+    cardPower: number;
     cardMod: number;
+    artsCardPower: number;
     artsMod: number;
+    busterCardPower: number;
     busterMod: number;
+    quickCardPower: number;
     quickMod: number;
     extraMod: number;
     extraCardPower: number;

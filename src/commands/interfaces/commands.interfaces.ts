@@ -16,8 +16,8 @@ export interface CalcTerms {
     cardDamageValue: number;
     /** Card effectiveness up or down */
     cardMod: number;
-    /** Extra card strength up/down (see Astarte post-NP buff) */
-    extraCardPower: number;
+    /** Card strength up/down (see Astarte post-NP buff, Prisma Causeway World End Match card damage bonus CEs) */
+    cardPower: number;
     /** Class-dependent atk multiplier */
     classAtkBonus: number;
     /** Class-advantage-based atk multiplier */

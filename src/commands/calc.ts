@@ -156,6 +156,8 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     let cardMod = args.extra ? f32(0) : f32(args.cardMod ?? 0) / f32(100);
 
+    let cardPower = args.extra ? f32(0) : f32(args.cardPower ?? 0) / f32(100);
+
     let isCritical = !!((faceCard && args.critical && !args.extra) || (enemyFaceCard && (args.strength || args.critical) && !args.weak));
 
     let critDamageMod = f32(args.critDamageMod ?? 0) / f32(100);
@@ -405,13 +407,22 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     if (args.buster) critDamageMod += f32(args.busterCritDamageMod ?? 0) / f32(100);
     if (args.quick) critDamageMod += f32(args.quickCritDamageMod ?? 0) / f32(100);
 
-    if (args.arts || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "arts" && !faceCard))
+    if (args.arts || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "arts" && !faceCard)) {
         cardMod += f32(args.artsMod ?? 0) / f32(100);
-    if (args.buster || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "buster" && !faceCard))
+        cardPower += f32(args.artsCardPower ?? 0) / f32(100);
+    }
+    if (args.buster || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "buster" && !faceCard)) {
         cardMod += f32(args.busterMod ?? 0) / f32(100);
-    if (args.quick || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "quick" && !faceCard))
+        cardPower += f32(args.busterCardPower ?? 0) / f32(100);
+    }
+    if (args.quick || ((noblePhantasm as NoblePhantasm.NoblePhantasm).card === "quick" && !faceCard)) {
         cardMod += f32(args.quickMod ?? 0) / f32(100);
-    if (args.extra) cardMod += f32(args.extraMod ?? 0) / f32(100);
+        cardPower += f32(args.quickCardPower ?? 0) / f32(100);
+    }
+    if (args.extra) {
+        cardMod += f32(args.extraMod ?? 0) / f32(100);
+        cardPower += f32(args.extraCardPower ?? 0) / f32(100);
+    }
 
     if (args.superbg || args.superscope || args.supersumo || args.superad || args.superhns || args.superfondant)
         servantAtk += args.totalAttack ? 0 : 2000;
@@ -521,7 +532,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         firstCardBonus,
         cardDamageValue,
         cardMod,
-        extraCardPower: f32(args.extraCardPower ?? 0) / f32(100),
+        cardPower: f32(args.extraCardPower ?? 0) / f32(100),
         classAtkBonus,
         triangleModifier,
         attributeModifier,
@@ -791,7 +802,7 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
         firstCardBonus,
         cardDamageValue,
         cardMod,
-        extraCardPower,
+        cardPower,
         classAtkBonus,
         triangleModifier,
         attributeModifier,
@@ -830,7 +841,7 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
     const rawDamage = f32(
         f32(servantAtk) *
             f32(npDamageMultiplier) *
-            f32(f32(firstCardBonus) + f32(cardDamageValue) * f32(Math.max(1 + f32(cardMod) + f32(extraCardPower), 0))) *
+            f32(f32(firstCardBonus) + f32(cardDamageValue) * f32(Math.max(1 + f32(cardMod) + f32(cardPower), 0))) *
             f32(classAtkBonus) *
             f32(triangleModifier) *
             f32(attributeModifier) *

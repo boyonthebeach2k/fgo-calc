@@ -95,10 +95,22 @@ const commands: {
         type: "Command card buffs",
     },
     defMod: { aliases: ["d", "def"], param: "number[]", description: "Target DEF X% up/down", type: "Command card buffs" },
+    cardPower: {
+        aliases: ["ca", "cp"],
+        param: "number[]",
+        description: "Card strength X% up/down (see Prisma Causeway World End Match card damage bonus CEs)",
+        type: "Command card buffs",
+    },
     cardMod: {
         aliases: ["cm", "m"],
         param: "number[]",
         description: "Servant card performance X% up/down, or target card resistance X% up/down",
+        type: "Command card buffs",
+    },
+    artsCardPower: {
+        aliases: ["aa", "ap", "acp"],
+        param: "number[]",
+        description: "Arts card strength X% up/down (see Prisma Causeway World End Match card damage bonus CEs)",
         type: "Command card buffs",
     },
     artsMod: {
@@ -107,10 +119,22 @@ const commands: {
         description: "Arts card performance X% up/down, or target arts card resistance X% up/down",
         type: "Command card buffs",
     },
+    busterCardPower: {
+        aliases: ["ba", "bp", "bcp"],
+        param: "number[]",
+        description: "Buster card strength X% up/down (see Prisma Causeway World End Match card damage bonus CEs)",
+        type: "Command card buffs",
+    },
     busterMod: {
         aliases: ["bm"],
         param: "number[]",
         description: "Buster card performance X% up/down, or target buster extra card resistance X% up/down",
+        type: "Command card buffs",
+    },
+    quickCardPower: {
+        aliases: ["qa", "qp", "qcp"],
+        param: "number[]",
+        description: "Quick card strength X% up/down (see Prisma Causeway World End Match card damage bonus CEs)",
         type: "Command card buffs",
     },
     quickMod: {
@@ -128,7 +152,7 @@ const commands: {
     extraCardPower: {
         aliases: ["ea", "ep", "ecp"],
         param: "number[]",
-        description: "Extra card strength X% up/down, e.g. Astarte's post-NP buff",
+        description: "Extra card strength X% up/down (see Astarte's post-NP buff)",
         type: "Command card buffs",
     },
     npMod: { aliases: ["n"], param: "number[]", description: "Servant NP Damage X% up/down", type: "Command card buffs" },
