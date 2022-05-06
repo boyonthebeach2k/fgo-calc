@@ -521,6 +521,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         firstCardBonus,
         cardDamageValue,
         cardMod,
+        extraCardPower: f32(args.extraCardPower ?? 0) / f32(100),
         classAtkBonus,
         triangleModifier,
         attributeModifier,
@@ -541,7 +542,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         selfDmgCutAdd,
         busterChainMod,
 
-        //--- Refund & Stargen
+        //--- Refund
         offensiveNPRate,
         cardNPValue,
         enemyServerMod,
@@ -790,6 +791,7 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
         firstCardBonus,
         cardDamageValue,
         cardMod,
+        extraCardPower,
         classAtkBonus,
         triangleModifier,
         attributeModifier,
@@ -828,7 +830,7 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
     const rawDamage = f32(
         f32(servantAtk) *
             f32(npDamageMultiplier) *
-            f32(f32(firstCardBonus) + f32(cardDamageValue) * f32(Math.max(1 + f32(cardMod), 0))) *
+            f32(f32(firstCardBonus) + f32(cardDamageValue) * f32(Math.max(1 + f32(cardMod) + f32(extraCardPower), 0))) *
             f32(classAtkBonus) *
             f32(triangleModifier) *
             f32(attributeModifier) *

@@ -16,6 +16,8 @@ export interface CalcTerms {
     cardDamageValue: number;
     /** Card effectiveness up or down */
     cardMod: number;
+    /** Extra card strength up/down (see Astarte post-NP buff) */
+    extraCardPower: number;
     /** Class-dependent atk multiplier */
     classAtkBonus: number;
     /** Class-advantage-based atk multiplier */

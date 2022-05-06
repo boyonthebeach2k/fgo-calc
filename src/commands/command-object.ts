@@ -98,31 +98,37 @@ const commands: {
     cardMod: {
         aliases: ["cm", "m"],
         param: "number[]",
-        description: "Servant card performance X% up/down, or target card resistance x% up/down",
+        description: "Servant card performance X% up/down, or target card resistance X% up/down",
         type: "Command card buffs",
     },
     artsMod: {
         aliases: ["am"],
         param: "number[]",
-        description: "Arts card performance X% up/down, or target arts card resistance x% up/down",
+        description: "Arts card performance X% up/down, or target arts card resistance X% up/down",
         type: "Command card buffs",
     },
     busterMod: {
         aliases: ["bm"],
         param: "number[]",
-        description: "Buster card performance X% up/down, or target buster extra card resistance x% up/down",
+        description: "Buster card performance X% up/down, or target buster extra card resistance X% up/down",
         type: "Command card buffs",
     },
     quickMod: {
         aliases: ["qm"],
         param: "number[]",
-        description: "Quick card performance X% up/down, or target quick card resistance x% up/down",
+        description: "Quick card performance X% up/down, or target quick card resistance X% up/down",
         type: "Command card buffs",
     },
     extraMod: {
         aliases: ["em"],
         param: "number[]",
-        description: "Extra card performance X% up/down, or target extra card resistance x% up/down",
+        description: "Extra card performance X% up/down, or target extra card resistance X% up/down",
+        type: "Command card buffs",
+    },
+    extraCardPower: {
+        aliases: ["ea", "ep", "ecp"],
+        param: "number[]",
+        description: "Extra card strength X% up/down, e.g. Astarte's post-NP buff",
         type: "Command card buffs",
     },
     npMod: { aliases: ["n"], param: "number[]", description: "Servant NP Damage X% up/down", type: "Command card buffs" },
@@ -177,6 +183,7 @@ const commands: {
     },
     // Non-offensive
     npGain: { aliases: ["npgen", "npg", "ng"], param: "number[]", description: "NP charge rate X% up/down", type: "Non-offensive buffs" },
+
     flatRefund: {
         aliases: ["flatgain", "fr"],
         param: "number[]",
