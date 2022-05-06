@@ -45,7 +45,7 @@ const commands: {
     superscope: { aliases: ["sscope"], param: "boolean", description: "Forces ce2000 (Kaleidoscope)", type: "Shorthands" },
     supersumo: { aliases: [], param: "boolean", description: "Forces ce2000 a15 (Golden Sumo)", type: "Shorthands" },
     // Command cards
-    arts: { aliases: ["aa"], param: "boolean", description: "Calc arts card", type: "Command cards" }, // Experimental
+    arts: { aliases: ["a"], param: "boolean", description: "Calc arts card", type: "Command cards" }, // Experimental
     buster: { aliases: ["b"], param: "boolean", description: "Calc buster card", type: "Command cards" }, // Experimental
     quick: { aliases: ["q"], param: "boolean", description: "Calc quick card", type: "Command cards" }, // Experimental
     extra: { aliases: ["e"], param: "boolean", description: "Calc extra card", type: "Command cards" }, // Experimental
