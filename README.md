@@ -25,7 +25,7 @@ function getSvt(id: number): Promise<Servant.Servant | Enemy.Enemy> {
     return apiConnector.servant(id, false, cacheDuration);
 }
 
-getSvt(100500).then(calcSvt(svt, commandString));
+getSvt(100500).then((svt) => calcSvt(svt, commandString));
 ```
 
 #### Get human-readable help messages
