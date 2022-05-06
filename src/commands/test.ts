@@ -94,6 +94,10 @@ const chain = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): ChainCalcVal
     }
 
     for (const [cardNo, card] of cards.entries()) {
+        if (card.name === "skip") {
+            continue;
+        }
+
         const cardMinCmdString =
             baseStr + " " + (hasRefundOrStars ? `hp${minEnemyHp} reducedHp${refundStarFields.accReducedHp}` : "") + " " + card.command;
 
@@ -230,7 +234,7 @@ const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCa
                     maxOverkillNo = calcVals.maxOverkillNo;
                 }
 
-                warnings += (warnings ? "\n" : "") + calcVals.warnings;
+                warnings += (warnings.trim() ? "\n" : "") + calcVals.warnings;
             } else {
                 calcVals = calc(svt, baseStr + enemyCmd);
 
@@ -251,7 +255,7 @@ const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCa
                     maxOverkillNo = calcVals.maxNPFields.overkillNo;
                 }
 
-                warnings += (warnings ? "\n" : "") + calcVals.calcTerms.warnMessage;
+                warnings += (warnings.trim() ? "\n" : "") + calcVals.calcTerms.warnMessage;
             }
 
             waveFields.totalDamage += damage;
