@@ -102,7 +102,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         if (Object.keys(nps).includes(args.setNp as any as string)) {
             npNumber = nps.length ? nps[args.setNp] : "-1";
         } else {
-            warnMessage += `${args.setNp} is not in ${servantName}'s NPs. Try doing \`!l ${svt.collectionNo}\` first.\n`;
+            warnMessage += `${args.setNp} is not in ${servantName}'s NPs. Try \`!l ${svt.collectionNo}\` first.\n`;
         }
     }
 
@@ -594,7 +594,12 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         strengthen: !!+npNumber,
         ce: args.ce,
         servantURL: `https://apps.atlasacademy.io/db/JP/${isEnemy(svt) ? "enemy" : "servant"}/${svt.id}`,
-        servantThumbnail: svt.extraAssets.faces.ascension?.[4] ?? "",
+        servantThumbnail:
+            svt.extraAssets.faces.ascension?.[4] ??
+            svt.extraAssets.faces.ascension?.[3] ??
+            svt.extraAssets.faces.ascension?.[2] ??
+            svt.extraAssets.faces.ascension?.[1] ??
+            "",
     };
 
     return calcTerms;
