@@ -33,7 +33,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     let warnMessage = args.unknownArgs?.length ? `Unkown args: ${(args.unknownArgs ?? []).join(", ")}\n` : "";
 
     //--- Base setup
-    if (args.npLevel && (args.npLevel > 5 || args.npLevel < 1)) {
+    if (args.npLevel !== undefined && (args.npLevel > 5 || args.npLevel < 1)) {
         warnMessage += "NP Level must be within [1,5]. Setting NP level to 5 (default).\n";
         args.npLevel = 5;
     }
@@ -54,7 +54,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         args.ce = 0;
     }
     args.ce = Math.floor(args.ce);
-    if (args.level && args.level > 120) {
+    if (args.level !== undefined && args.level > 120) {
         warnMessage += "Setting Servant level to 120.\n";
         args.level = 120;
     }
