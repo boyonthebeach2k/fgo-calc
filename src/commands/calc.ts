@@ -54,12 +54,12 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         args.ce = 0;
     }
     args.ce = Math.floor(args.ce);
-    if (args.level !== undefined && args.level > 120) {
-        warnMessage += "Setting Servant level to 120.\n";
-        args.level = 120;
+    if (args.level !== undefined && (args.level < 1 || args.level > 120)) {
+        warnMessage += "Servant level must lie in [1, 120]. Setting to natural (ungrailed) level cap.\n";
+        args.level = svt.lvMax;
     }
-    if (!args.level) {
-        args.level = 0;
+    if (args.level === undefined) {
+        args.level = svt.lvMax;
     }
     args.level = Math.floor(args.level);
 
@@ -146,7 +146,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     let classAtkBonus = f32(classList[svt.className] / f32(1000));
 
-    let servantAtk = f32(args.level > 0 ? svt.atkGrowth[args.level - 1] : svt.atkMax);
+    let servantAtk = f32(svt.atkGrowth[args.level - 1]);
 
     let triangleModifier = f32(args.classOverride ?? (classRelation[svt.className]?.[enemyClass] ?? 1000) / f32(1000));
 
