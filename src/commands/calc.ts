@@ -838,6 +838,10 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
         fou,
         fouPaw,
         ce,
+        servantClass,
+        servantName,
+        servantThumbnail,
+        servantURL,
         warnMessage,
         verbosity,
     } = calcTerms;
@@ -891,6 +895,10 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
     let generalFields = {
         baseAtk: servantAtk - fou - ce - fouPaw,
         damageMultiplier: faceCard || enemyFaceCard ? cardDamageValue : npDamageMultiplier,
+        servantClass,
+        servantName,
+        servantThumbnail,
+        servantURL,
         verbosity,
         warnMessage,
     };
