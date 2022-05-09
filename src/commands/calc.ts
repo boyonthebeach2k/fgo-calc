@@ -336,6 +336,10 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         cardStarValue += f32(0.05 * (args.quick ? 20 : 2));
     }
 
+    if (args.arts) {
+        cardStarValue = 0;
+    }
+
     if (args.extra) {
         cardStarValue = f32(1);
     }
