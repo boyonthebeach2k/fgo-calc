@@ -207,6 +207,7 @@ export interface CalcVals {
         baseAtk: number;
         damageMultiplier: number;
         servantClass: string;
+        servantName: string;
         servantThumbnail: string;
         servantURL: string;
         verbosity: "nv" | "" | "v" | "vv" | "vvv";
