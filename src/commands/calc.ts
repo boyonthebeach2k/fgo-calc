@@ -196,7 +196,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         triangleModifier = f32(args.classOverride ?? classRelation[svt.className]["assassin"] / f32(1000));
     }
 
-    servantAtk = f32(args.totalAttack ?? servantAtk + args.fou + (args.ce ?? 0) + (faceCard ? args.fouPaw ?? 0 : 0));
+    servantAtk = f32(args.totalAttack ?? servantAtk + args.fou + (args.ce ?? 0) + (faceCard && !args.extra ? args.fouPaw ?? 0 : 0));
 
     let cardDamageValue = 1;
 
