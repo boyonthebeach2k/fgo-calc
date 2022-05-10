@@ -139,6 +139,8 @@ export interface CalcTerms {
     servantURL: string;
     /** Servant face thumbnail image URL */
     servantThumbnail: string;
+    /** The calc string for the given command card, specifying the various switches and buffs */
+    calcString: string;
 }
 
 export interface NPFields {

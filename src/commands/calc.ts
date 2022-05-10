@@ -604,6 +604,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
             svt.extraAssets.faces.ascension?.[2] ??
             svt.extraAssets.faces.ascension?.[1] ??
             "",
+        calcString: args.calcString ?? "",
     };
 
     return calcTerms;

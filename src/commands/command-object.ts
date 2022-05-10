@@ -308,6 +308,7 @@ const commands: {
         aliases: [],
         description: "/* ... inline comments ... */ and # End-of-line comments; these are ignored, and just for user convenience",
     },
+    calcString: { aliases: [] },
 };
 
 export { commands };

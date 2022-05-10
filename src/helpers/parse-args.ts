@@ -1,4 +1,5 @@
 import { Enemy, Servant } from "@atlasacademy/api-connector";
+import { calc } from "../commands/calc";
 
 import { commands } from "../commands/command-object";
 import { CommandObject } from "../commands/interfaces/command-object.interfaces";
@@ -20,9 +21,9 @@ const getSanitisedRawMatches = (regExpMatchArray: RegExpMatchArray[]): string[][
  */
 const parseBaseCommandString = (commandString: string): Partial<CommandObject> => {
     let matchObject: Partial<CommandObject> = {};
+    const calcStr = commandString;
 
     // To avoid confusing, say `a10` with `a 1` (10% ATK up vs first arts card), the keys are sorted first
-
     Object.keys(commands)
         .sort((keyA, keyB) =>
             (commands[keyA as keyof CommandObject].param ?? "") < (commands[keyB as keyof CommandObject].param ?? "") ? -1 : 1
@@ -88,6 +89,8 @@ const parseBaseCommandString = (commandString: string): Partial<CommandObject> =
             matchObject.unknownArgs = commandString.split(" ").filter((str) => str.length);
         }
     }
+
+    matchObject.calcString = calcStr;
 
     return matchObject;
 };

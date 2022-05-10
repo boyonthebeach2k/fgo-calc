@@ -133,4 +133,7 @@ export interface CommandObject extends ServantBaseStats {
     unknownArgs: string[];
     waves: never;
     comments: never;
+
+    // Internal ^2 (not included in cmdArgs)
+    calcString: string;
 }
