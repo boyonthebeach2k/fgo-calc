@@ -945,7 +945,7 @@ const getValsFromTerms = (calcTerms: CalcTerms): CalcVals => {
  * to the given svt ID/C.No. and base command string and returns the resultant vals
  * @param svt The svt to calc for
  * @param baseCommandString The command string to apply to the svt before calcing
- * @returns Promise resolved with the {@link CalcVals} object that is obtained after applying the damage, refund and stargen formulas to the given svt
+ * @returns A {@link CalcVals} object that is obtained after applying the damage, refund and stargen formulas to the given svt
  */
 const calc = (svt: Servant.Servant | Enemy.Enemy, baseCommandString: string) => {
     const commandObject = parseBaseCommandString(baseCommandString);

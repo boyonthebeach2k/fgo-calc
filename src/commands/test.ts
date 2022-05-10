@@ -40,7 +40,7 @@ const calcSvt = (svt: Servant.Servant | Enemy.Enemy, argStr: string) => {
  * Obtain damage, refund, etc for each card in the given chain by calling the calc function sequentially
  * @param svt The servant whose card chain is to be calced
  * @param cmdStr The whole command string containing the various buffs
- * @returns Promise resolved with a {@link ChainCalcVals} object containing the various results obtained after calcing the given chain
+ * @returns A {@link ChainCalcVals} object containing the various results obtained after calcing the given chain
  */
 const chain = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): ChainCalcVals => {
     let damageFields = {
@@ -164,7 +164,7 @@ const chain = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): ChainCalcVal
  * Obtain damage, refund, etc for each given enemy by calling the calc function sequentially per enemy as well as chain where applicable
  * @param svt The servant to be calced
  * @param cmdStr The whole command string containing the various buffs
- * @returns Promise reolving to an {@link EnemyCalcVals} object containing the various results obtained after calcing the given svt & enemies
+ * @returns An {@link EnemyCalcVals} object containing the various results obtained after calcing the given svt & enemies
  */
 const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCalcVals => {
     const { baseStr, waves, verboseLevel } = parseMultiEnemyCommandString(cmdStr);
