@@ -578,7 +578,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         artsFirst,
         busterFirst,
         quickFirst,
-        cardName,
+        cardName: cardName === "NP" ? (noblePhantasm?.card as any as typeof cardName) ?? "NP" : cardName,
         cardPosition,
         enemyAttribute,
         enemyClass,
