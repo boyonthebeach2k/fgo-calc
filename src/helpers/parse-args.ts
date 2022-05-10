@@ -190,10 +190,9 @@ const parseChainCommandString = (svt: Servant.Servant | Enemy.Enemy, argStr: str
     if (chain[0].name === chain[1].name && chain[1].name === chain[2].name && chain[3] !== undefined) {
         chain[3].command = "ecm 3.5 " + chain[3].command;
     }
-
     let hasRefundOrStars = false,
         enemyHp: number | undefined,
-        hpMatches = baseStr.match(/\s+hp\s*\d+/g);
+        hpMatches = baseStr.match(/(^|\s+)hp\s*\d+/g);
 
     if (hpMatches !== null) {
         hasRefundOrStars = true;
