@@ -270,7 +270,7 @@ export interface EnemyCalcVals {
             minStars?: number;
             maxStars?: number;
             overkillNo?: number;
-            maxoverkillNo?: number;
+            maxOverkillNo?: number;
             enemyClass: string;
             enemyAttribute: string;
             warnings: string;
