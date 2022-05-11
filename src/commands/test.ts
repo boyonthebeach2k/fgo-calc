@@ -239,7 +239,7 @@ const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCa
                 calcVals = calc(svt, baseStr + enemyCmd);
 
                 enemyClass = calcVals.calcTerms.enemyClass;
-                enemyAttribute = calcVals.calcTerms.enemyClass;
+                enemyAttribute = calcVals.calcTerms.enemyAttribute;
                 hasRefundOrStars = calcVals.calcTerms.enemyHp !== undefined;
 
                 damage = calcVals.damageFields.damage;
