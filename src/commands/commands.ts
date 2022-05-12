@@ -14,7 +14,6 @@ const cmdArgs = () => {
             { aliases, param, description, type } = command;
 
         let aliasesDesc = aliases.length ? `Aliases: ${aliases}\n` : "",
-            typeDesc = type ? `Usage: ${type}\n` : "",
             desc = description ?? "";
 
         let paramDesc = "";
@@ -34,7 +33,7 @@ const cmdArgs = () => {
                 break;
         }
 
-        const cmdDesc = (aliasesDesc + typeDesc + paramDesc + desc).trim();
+        const cmdDesc = (aliasesDesc + paramDesc + desc).trim();
 
         if (cmdDesc.length) {
             args.push({ name, description: cmdDesc, type: type ?? "Misc" });
