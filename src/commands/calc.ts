@@ -279,7 +279,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         }
     }
 
-    cardDamageValue = isEnemy(svt) && (args.weak || args.strength) ? 0.8 : cardDamageValue;
+    cardDamageValue = isEnemy(svt) && (args.weak || args.strength) ? 1 : cardDamageValue;
     cardDamageValue = args.cardValue ?? cardDamageValue;
 
     if (args.extra) {
