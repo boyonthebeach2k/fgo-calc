@@ -112,10 +112,14 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     let npDamageMultiplier = 0;
     let npFns = (noblePhantasm as NoblePhantasm.NoblePhantasm).functions ?? {};
 
-    for (const npFn in npFns) {
-        if (npFns[npFn].funcType.includes("damageNp")) {
-            npDamageMultiplier = f32(npFns[npFn]?.svals[args.npLevel - 1].Value ?? 0) / f32(10);
+    for (const [npFnNo, npFn] of npFns.entries()) {
+        if (npFn.funcType.includes("damageNp")) {
+            npDamageMultiplier = f32(npFn?.svals[args.npLevel - 1].Value ?? 0) / f32(10);
             break;
+        }
+        if (npFnNo === npFns.length - 1) {
+            // If there is no damageNp; setting -Infinity to swallow any flat damage
+            args.flatDamage = -Infinity;
         }
     }
 
