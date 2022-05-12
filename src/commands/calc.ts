@@ -14,7 +14,7 @@ const f32 = (val: number) => Math.fround(val);
  * @param entity Entity of type {@link Enemy.Enemy} | `{ detail: string }`, to be checked
  * @returns boolean: true if `entity.type === "enemy"`, false otherwise
  */
-const isEnemy = (entity: Servant.Servant | Enemy.Enemy): entity is Enemy.Enemy => entity.type === "enemy";
+const isEnemy = (entity: Servant.Servant | Enemy.Enemy): entity is Enemy.Enemy => entity.cardDetails.weak !== undefined;
 
 /**
  * Maps the given CommandObject to promise that resolves to terms that are then passed into the
@@ -113,7 +113,6 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     let npFns = (noblePhantasm as NoblePhantasm.NoblePhantasm).functions ?? {};
 
     for (const npFn in npFns) {
-        // try with of <-- what was i high on
         if (npFns[npFn].funcType.includes("damageNp")) {
             npDamageMultiplier = f32(npFns[npFn]?.svals[args.npLevel - 1].Value ?? 0) / f32(10);
             break;
@@ -122,8 +121,8 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     //--- Setting facecard, if any
 
-    let faceCard = !!(["normal", "enemyCollectionDetail"].includes(svt.type) && (args.arts || args.buster || args.quick || args.extra));
-    let enemyFaceCard = !!(svt.type === "enemy" && (args.weak || args.strength));
+    let faceCard = !!(!isEnemy(svt) && (args.arts || args.buster || args.quick || args.extra));
+    let enemyFaceCard = !!(isEnemy(svt) && (args.weak || args.strength));
 
     npDamageMultiplier = f32(args.npValue ?? npDamageMultiplier) / f32(100);
 
@@ -144,7 +143,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     //--- Other terms in the damage formula
 
-    let classAtkBonus = f32(classList[svt.className] / f32(1000));
+    let classAtkBonus = f32((classList[svt.className] ?? 1000) / f32(1000));
 
     let servantAtk = f32(svt.atkGrowth[args.level - 1]);
 
@@ -206,22 +205,22 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     if (faceCard) {
         if (args.arts) {
             cardDamageValue = 1;
-            hits = svt.hitsDistribution.arts!;
+            hits = svt.hitsDistribution.arts ?? [];
         } else if (args.buster) {
             cardDamageValue = 1.5;
-            hits = svt.hitsDistribution.buster!;
+            hits = svt.hitsDistribution.buster ?? [];
         } else if (args.quick) {
             cardDamageValue = 0.8;
-            hits = svt.hitsDistribution.quick!;
+            hits = svt.hitsDistribution.quick ?? [];
         } else if (args.extra) {
             cardDamageValue = 1;
-            hits = svt.hitsDistribution.extra!;
+            hits = svt.hitsDistribution.extra ?? [];
         }
     } else if (enemyFaceCard) {
-        if (args.weak && isEnemy(svt)) {
-            hits = svt.hitsDistribution.weak!;
+        if (args.weak) {
+            hits = svt.hitsDistribution.weak ?? [];
         } else if (args.strength && isEnemy(svt)) {
-            hits = svt.hitsDistribution.strength!;
+            hits = svt.hitsDistribution.strength ?? [];
         }
     }
     // No need for else because default value of hits is npDistribution
