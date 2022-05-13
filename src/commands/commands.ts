@@ -1,6 +1,6 @@
 import { Enemy, Servant } from "@atlasacademy/api-connector";
 import { commands } from "./command-object";
-import { calcSvt } from "./test";
+import { calcSvt, init } from "./test";
 
 /**
  * Maps the {@link commands} to a human-readable description containing type, aliases, etc
@@ -64,4 +64,4 @@ const getNps = (svt: Servant.Servant | Enemy.Enemy) => {
     return npDesc;
 };
 
-export { calcSvt, cmdArgs, getNps };
+export { calcSvt, cmdArgs, getNps, init };

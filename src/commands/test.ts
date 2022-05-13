@@ -1,7 +1,7 @@
 import { Enemy, Servant } from "@atlasacademy/api-connector";
 
 import { parseChainCommandString, parseMultiEnemyCommandString } from "../helpers/parse-args";
-import { calc } from "./calc";
+import { calc, init } from "./calc";
 import { CalcVals, ChainCalcVals, EnemyCalcVals } from "./interfaces/commands.interfaces";
 
 /**
@@ -286,4 +286,4 @@ const multiEnemy = (svt: Servant.Servant | Enemy.Enemy, cmdStr: string): EnemyCa
     return enemyCalcVals;
 };
 
-export { calcSvt };
+export { calcSvt, init };

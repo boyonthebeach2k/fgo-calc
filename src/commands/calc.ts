@@ -9,6 +9,9 @@ import { CalcTerms, CalcVals, DamageFields, NPFields, StarFields } from "./inter
 
 const f32 = (val: number) => Math.fround(val);
 
+/** NA NPs for the given svt, i.e. before any JP ludes */
+let NANoblePhantasms: NoblePhantasm.NoblePhantasm[];
+
 /** Checks if a given entity is an enemy:
  * Enemies have `type: "enemy"` by definition, so to check if the given entity is an enemy, simply check that the type is "enemy"
  * @param entity Entity of type {@link Enemy.Enemy} | `{ detail: string }`, to be checked
@@ -74,6 +77,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
 
     //--- Setting NP to use
     let nps = Object.keys(svt.noblePhantasms),
+        naNPs = Object.keys(NANoblePhantasms),
         npNumber: string;
 
     if (!isEnemy(svt)) {
@@ -86,8 +90,12 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         /* Setting default NP for Astarte and Melusine */
         npNumber = nps[0];
     } else {
-        /* Setting last NP, i.e. after all ludes, as default */
-        npNumber = nps.length ? nps[nps.length - 1] : "-1";
+        /* Setting last NA NP, i.e. after all NA ludes, as default */
+        if (naNPs) {
+            npNumber = naNPs.length ? naNPs[naNPs.length - 1] : "-1";
+        } else {
+            npNumber = nps.length ? nps[nps.length - 1] : "-1";
+        }
 
         if (isEnemy(svt)) {
             npNumber = "0";
@@ -959,4 +967,9 @@ const calc = (svt: Servant.Servant | Enemy.Enemy, baseCommandString: string) => 
     return calcVals;
 };
 
-export { calc };
+/** Initialise: set latest NA Servant collectionNo */
+const init = (NPs: NoblePhantasm.NoblePhantasm[]) => {
+    NANoblePhantasms = NPs;
+};
+
+export { calc, init };
