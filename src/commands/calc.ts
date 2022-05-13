@@ -522,6 +522,40 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
     }
     enemyServerMod = f32(args.enemyServerMod ?? enemyServerMod);
 
+    //---Enforce buff caps
+    if (atkMod > 4) {
+        warnMessage += "Value for atkMod exceeds cap (400%), setting to capped value.\n";
+        atkMod = f32(4);
+    }
+    if (defMod < -1) {
+        warnMessage += "Value for defMod exceeds cap (-100%), setting to capped value.\n";
+        defMod = f32(-1);
+    }
+    if (cardMod > 4) {
+        warnMessage += "Value for cardMod exceeds cap (400%), setting to capped value.\n";
+        cardMod = f32(4);
+    }
+    if (powerMod > 10) {
+        warnMessage += "Value for powerMod exceeds cap (1000%), setting to capped value.\n";
+        powerMod = f32(10);
+    }
+    if (critDamageMod > 5) {
+        warnMessage += "Value for critDamageMod exceeds cap (500%), setting to 400%.\n";
+        critDamageMod = f32(5);
+    }
+    if (npDamageMod > 5) {
+        warnMessage += "Value for npDamageMod exceeds cap (500%), setting to 400%.\n";
+        npDamageMod = f32(5);
+    }
+    if (npChargeRateMod > 4) {
+        warnMessage += "Value for npChargeRateMod exceeds cap (400%), setting to 400%.\n";
+        npChargeRateMod = f32(4);
+    }
+    if (starDropMod > 4) {
+        warnMessage += "Value for starDropMod exceeds cap (400%), setting to 400%.\n";
+        starDropMod = f32(4);
+    }
+
     //--- Misc
     let verbosity: "nv" | "" | "v" | "vv" | "vvv" = args.nonVerbose ? "nv" : ("v".repeat(args.verboseLevel ?? 0) as any);
 
