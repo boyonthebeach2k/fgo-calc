@@ -91,7 +91,7 @@ const commandObjectToCalcTerms = (svt: Servant.Servant | Enemy.Enemy, args: Part
         npNumber = nps[0];
     } else {
         /* Setting last NA NP, i.e. after all NA ludes, as default */
-        if (naNPs) {
+        if (naNPs.length) {
             npNumber = naNPs.length ? naNPs[naNPs.length - 1] : "-1";
         } else {
             npNumber = nps.length ? nps[nps.length - 1] : "-1";
